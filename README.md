@@ -12,27 +12,31 @@ The following paths work in each environment:
 * /demo => Single page HTML application
 
 # Setup
-You will need to have mongodb installed and running.  Installation info for the major platforms is at https://docs.mongodb.org/manual/installation/
 
+## Mongo
+You will need to have mongodb installed and running.  Installation info for the major platforms is at https://docs.mongodb.org/manual/installation/
 
 To insert the information from the quoteid.json file to get your DB started, use the following command:
 
 `mongoimport --collection quotes --file ../data/quoteid.json --type json --jsonArray`
 
-```
 # PHP
-$ php composer.phar install 
 
-$ pecl install mongo
-$ php -i | grep ini - add extension=mongo.so to this file, or create it
-$ php -S 0.0.0.0:8080 -t ./public/ ./public/index.php
+```
+php composer.phar install 
+pecl install mongo
+php -S 0.0.0.0:8080 -t ./public/ ./public/index.php
 ```
 
 # Python
+
 `cd python; pip install -r requirements.txt; python flask-server.py`
 
 # Node
+For express:
 `cd node; npm install; node express-server.js`
+
+For hapi:
 `cd node; npm install; node hapi-server.js`
 
 # Ruby
@@ -61,12 +65,15 @@ Alternatively, you can use Cloud 9 (https://c9.io) to setup a cloud-based contai
  * Setup and run mongo within a new c9 terminal tab based on https://community.c9.io/t/setting-up-mongodb/1717, plus installing required packages for the c9 environment:
 
 ```
-$ php composer.phar install 
-$ sudo apt-get install php5 php5-dev libapache2-mod-php5 apache2-threaded-dev php-pear php5-mongo
-$ wget http://pecl.php.net/get/mongo
-$ sudo pecl install mongo
-$ echo 'mongod --bind_ip=$IP --dbpath=data --nojournal --rest "$@"' > mongod
-$ chmod a+x mongod
-$ ./mongod
+cd php
+php composer.phar install 
+cd ..
+sudo apt-get install php5 php5-dev libapache2-mod-php5 apache2-threaded-dev php-pear php5-mongo -y
+wget http://pecl.php.net/get/mongo
+sudo pecl install mongo
+echo 'mongod --bind_ip=$IP --dbpath=data --nojournal --rest "$@"' > mongod
+chmod a+x mongod
+./mongod
 ```
- * In a new tab: follow the Setup instructions for the PHP, Python, Node, Ruby and Perl instructions as usual.
+ * In a new tab: load the mongo data from the `mongoimport` command above
+ * follow the Setup instructions for the PHP, Python, Node, Ruby and Perl instructions as usual.
